@@ -4,29 +4,22 @@ import Memo from "./memo.js";
 export default class App {
   constructor($body) {
     this.$body = $body;
+    // this.$body.style.width = "100%";
     this.time = getDay();
-    this.interval = setInterval(() => {
-      this.setState({ time: getDay() });
-    }, 1000);
+    // this.interval = setInterval(() => {
+    //   this.setState({ time: getDay() });
+    // }, 1000);
 
     this.render();
+    this.interval = setInterval(this.changeTime, 1000);
 
     return this.$body;
   }
 
-  initMain() {}
-
-  getDay() {
-    const today = new Date();
-
-    const year = today.getFullYear();
-    const month = today.getMonth() + 1;
-    const day = today.getDay();
-    const hour = today.getHours();
-    const min = today.getMinutes();
-    const sec = today.getSeconds();
-
-    return `${year}년 ${month}월 ${day}일 ${hour}시 ${min}분 ${sec}초`;
+  changeTime() {
+    this.time = getDay();
+    const $time = document.querySelector(".statusTime");
+    $time.textContent = this.time;
   }
 
   setState(data) {
@@ -41,7 +34,6 @@ export default class App {
     this.$body.style.height = "100vh";
 
     const $status = document.createElement("div");
-    $status.style.border = "1px solid black";
     $status.style.display = "flex";
     $status.style.justifyContent = "center";
 

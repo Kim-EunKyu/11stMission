@@ -1,4 +1,30 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+.memoInput {
+  display: none;
+}
+
+.active {
+  display: block;
+}
+
+.memoList {
+  line-height: 20px;
+  max-height: 40px;
+}
+
+.select {
+  max-height: none;
 }
