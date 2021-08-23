@@ -32,6 +32,7 @@ export default class Alarm {
   makeInputList(name, values) {
     const $list = document.createElement("input");
     $list.type = "text";
+    $list.style.width = "60px";
     $list.onclick = () => {
       $list.value = "";
     };
@@ -87,16 +88,23 @@ export default class Alarm {
       "hour",
       [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     );
+    const $hourText = document.createElement("span");
+    $hourText.textContent = "시";
+
     const [$minList, $minDataList] = this.makeInputList(
       "min",
       [0, 10, 20, 30, 40, 50]
     );
+    const $minText = document.createElement("span");
+    $minText.textContent = "분";
 
     $inputTime.appendChild($ampmList);
     $inputTime.appendChild($ampmDataList);
     $inputTime.appendChild($hourList);
+    $inputTime.appendChild($hourText);
     $inputTime.appendChild($hourDataList);
     $inputTime.appendChild($minList);
+    $inputTime.appendChild($minText);
     $inputTime.appendChild($minDataList);
 
     const $alarmSaveBtn = document.createElement("button");
@@ -182,23 +190,11 @@ export default class Alarm {
     $alarmUl.style.listStyle = "none";
     $alarmUl.style.width = "100%";
     $alarmUl.style.height = "100%";
-    // $alarmUl.onclick = (e) => {
-    //   if (e.target.nodeName === "LI") {
-    //     e.target.classList.toggle("select");
-
-    //     if (this.beforeSelected !== null) {
-    //       this.beforeSelected.classList.toggle("select");
-    //     }
-    //     this.beforeSelected = e.target;
-    //   }
-    //   //   console.log(e.target.nodeName);
-    // };
     $main.appendChild($alarmUl);
 
     for (let i = 0; i < this.alarmList.length; i++) {
       const $alarmLi = document.createElement("li");
       const alarmTime = new Date(this.alarmList[i]);
-      // $alarmLi.textContent =
       $alarmLi.className = "alarmList";
       $alarmLi.style.margin = "2px 0";
       $alarmLi.style.border = "1px solid black";
@@ -231,7 +227,7 @@ export default class Alarm {
       $alarmLi.appendChild($removeBtn);
     }
 
-    // 메모 화면에 추가
+    // 알람 화면에 추가
     this.$target.innerHTML = "";
     this.$target.appendChild($status);
     this.$target.appendChild($wrapper);

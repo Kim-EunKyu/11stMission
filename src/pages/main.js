@@ -24,8 +24,7 @@ alarmData.forEach((value, idx) => {
     alert(`${alarm.getHours()}시 ${alarm.getMinutes()}분 알람 입니다.`);
     alarmData.splice(alarmData.indexOf(value), 1);
     localStorage.setItem("alarmList", JSON.stringify(alarmData));
-    // timer.getTimer().splic
-  }, alarm - now - 3 * 60 * 1000);
+  }, alarm - now);
   timer.addTimer(setTimer);
   console.log(timer.getTimer());
 });
