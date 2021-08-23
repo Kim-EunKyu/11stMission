@@ -28,3 +28,11 @@ ul {
 .select {
   max-height: none;
 }
+
+.imageSelect {
+  border: none;
+}
+
+.border {
+  border: 2px solid orange;
+}

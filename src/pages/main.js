@@ -1,5 +1,8 @@
 import { getDay } from "../utils/day.js";
 import Memo from "./memo.js";
+import Picture from "./picture.js";
+
+// const { getDay } = require("../utils/day.js");
 
 export default class App {
   constructor($body) {
@@ -82,6 +85,10 @@ export default class App {
     $picture.style.marginRight = "2vh";
     $picture.style.backgroundColor = "#ffffff";
     $picture.innerText = "사진";
+    $picture.onclick = () => {
+      new Picture(this.$body);
+      clearInterval(this.interval);
+    };
     $main.appendChild($picture);
 
     this.$body.innerHTML = "";
