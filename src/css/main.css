@@ -12,8 +12,13 @@ ul {
   padding: 0;
 }
 
-.memoInput {
+.memoInput,
+.alarmInput {
   display: none;
+}
+
+.alarmActive {
+  display: flex;
 }
 
 .active {

@@ -16,7 +16,6 @@ app.use(express.static("src"));
 let ImageList = fs.readdirSync("./src/image");
 const regx = /(.png|.jpg|.jpeg|.gif)$/;
 ImageList = ImageList.filter((value) => regx.test(value));
-console.log(ImageList);
 fs.writeFileSync("./src/image/List.json", JSON.stringify(ImageList));
 
 app.get("/", (req, res) => {

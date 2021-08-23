@@ -1,17 +1,39 @@
 import { getDay } from "../utils/day.js";
+import Alarm from "./alarm.js";
 import Memo from "./memo.js";
 import Picture from "./picture.js";
+import timer from "../utils/timer.js";
 
-// const { getDay } = require("../utils/day.js");
+// 백그라운드에서 알람 실행될 수 있도록 최초 한번 실행
+let alarmData = JSON.parse(localStorage.getItem("alarmList"));
+alarmData = alarmData.filter((value) => {
+  const now = new Date();
+  const alarm = new Date(value);
+  return alarm - now > 0;
+});
+
+localStorage.setItem("alarmList", JSON.stringify(alarmData));
+const data = localStorage.getItem("alarmList");
+data !== null ? JSON.parse(data) : [];
+alarmData.forEach((value, idx) => {
+  console.log(new Date(value));
+  const now = new Date();
+  const alarm = new Date(value);
+
+  const setTimer = setTimeout(() => {
+    alert(`${alarm.getHours()}시 ${alarm.getMinutes()}분 알람 입니다.`);
+    alarmData.splice(alarmData.indexOf(value), 1);
+    localStorage.setItem("alarmList", JSON.stringify(alarmData));
+    // timer.getTimer().splic
+  }, alarm - now - 3 * 60 * 1000);
+  timer.addTimer(setTimer);
+  console.log(timer.getTimer());
+});
 
 export default class App {
   constructor($body) {
     this.$body = $body;
-    // this.$body.style.width = "100%";
     this.time = getDay();
-    // this.interval = setInterval(() => {
-    //   this.setState({ time: getDay() });
-    // }, 1000);
 
     this.render();
     this.interval = setInterval(this.changeTime, 1000);
@@ -49,7 +71,6 @@ export default class App {
     $main.style.flex = "1";
     $main.style.display = "flex";
     $main.style.flexWrap = "wrap";
-    $main.style.border = "1px solid blue";
     $main.style.padding = "16px";
     $main.style.backgroundColor = "#4C73C4";
 
@@ -61,6 +82,10 @@ export default class App {
     $alarm.style.marginRight = "2vh";
     $alarm.style.backgroundColor = "#ffffff";
     $alarm.innerText = "알람";
+    $alarm.onclick = () => {
+      new Alarm(this.$body);
+      clearInterval(this.interval);
+    };
     $main.appendChild($alarm);
 
     const $memo = document.createElement("button");
